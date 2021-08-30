@@ -24,6 +24,7 @@ class HandDetector():
                     self.mpDraw.draw_landmarks(img, handLms, self.mpHands.HAND_CONNECTIONS)
         return img
 
+    # Find the position of a specific hand and specific landmarks
     def findPosition(self, img, handNo=0, fingerNumbers=None, draw=True):
         lmList = []
 

@@ -1,14 +1,14 @@
 import multiprocessing
 from pyo import *
 
-
+# Utility function to quickly get midi values for major/minor scale types
 def generateScale(key, quality):
     if quality.lower() == "major":
         return [key, key + 2, key + 4, key + 5, key + 7, key + 9, key + 11, key + 12]
     elif quality.lower() == "minor":
         return [key, key + 2, key + 3, key + 5, key + 7, key + 8, key + 11, key + 12]
 
-
+# Utility function to get midi value from note name and octave
 def nameToMidi(name, octave):
     c = 24
     if name == 'C':

@@ -6,6 +6,7 @@ import Synth
 import GUI
 
 if __name__ == '__main__':
+    # Using queues to communicate between processes
     synth_queue = multiprocessing.Queue()
     control_queue = multiprocessing.Queue()
     synth_control_queue = multiprocessing.Queue()
@@ -25,6 +26,8 @@ if __name__ == '__main__':
         lmList = detector.findPosition(img, fingerNumbers=[5, 8, 9, 12, 13, 16, 17, 20])
         if len(lmList) == 8:
             rootX = lmList[1][0]
+
+            # Checking distances between landmarks to determine chord tone qualities
             if (lmList[0][1] - lmList[1][1]) > 50:
                 rootY = lmList[1][1]
             else:
@@ -62,6 +65,7 @@ if __name__ == '__main__':
         else:
             synth_queue.put((0, 0, 0, 0, 0, 0, 0, 0))
 
+        #
         if not control_queue.empty():
             control_data = control_queue.get()
             if control_data == -1:
@@ -70,6 +74,7 @@ if __name__ == '__main__':
             else:
                 synth_control_queue.put(control_data)
 
+        # Tracking fps
         cTime = time.time()
         fps = 1 / (cTime - pTime)
         pTime = cTime
